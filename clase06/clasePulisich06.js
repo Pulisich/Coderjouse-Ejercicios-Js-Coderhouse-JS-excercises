@@ -87,14 +87,13 @@ for (const pastas of productos){
     
 };
 
-function ordenar(a, b){
-  ;  return a - b
+function compare (a, b){
+    if (a.relleno < b.relleno){
+        return -1;
+    }
+    return 0;
 }
 
-productos.sort(function(a, b){return a - b});
-
-
-
-
+console.log(productos.sort(compare));
 
 
