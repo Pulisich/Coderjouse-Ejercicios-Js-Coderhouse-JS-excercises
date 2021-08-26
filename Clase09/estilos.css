@@ -196,6 +196,7 @@ h2{
 
 /*FOOTER*/
 footer{
+    margin-top: 2%;
     background-color: seagreen;
     grid-area: footer;
     height: auto;

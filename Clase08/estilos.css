@@ -264,6 +264,13 @@ footer{
     
 }
 
+/*CARRITO*/
+.oculto{
+    display: none;
+}
+.visible{
+    display: inline;
+}
 /*@media only screen and (max-width: 375px) {
     .containerGrande{
         grid-auto-columns: 1fr;
