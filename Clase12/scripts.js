@@ -7,6 +7,28 @@ $(document).ready(function(){
 
 //Array con todos los productos 
 
+let listaCarrito= [];
+
+class Pasta {
+    constructor(tipo, relleno, caja, precio){
+        this.tipo= tipo;
+        this.relleno= relleno;
+        this.caja= caja;
+        this.precio= precio;
+        this.cantidad= 1;
+    }
+};
+ 
+
+// productos.push(new Pastas ("Sorrentinos", "Jamón y Muzarella", 15, 400));
+// productos.push(new Pastas ("Sorrentinos", "Calabacín asado, Muzarella, y Nueces", 15, 450));
+// productos.push(new Pastas ("Sorrentinos", "Berenjenas ahumadas y Hongos", 15, 470));
+// productos.push(new Pastas ("Sorrentinos", "Salmón y coso", 15, 550))
+// productos.push(new Pastas ("Sorrentinos", "Carne y Ricota", 15, 390));
+
+// for (const pastas of productos){
+//    console.log(pastas.tipo +" "+ pastas.relleno +" "+ pastas.precio);
+   
 
 //Ordenado array por precio, las cards se crean en base a este array, copado.
 
@@ -28,7 +50,7 @@ const renderProductos =()=>{
      <div> <img src= ${producto.foto} width: "55" height: "auto"></div>
      <li class="list-group-item"><p> Cantidad por caja: ${producto.caja}</p></li>
      <li class="list-group-item"><b> Precio: $${producto.precio}</b></li>
-     <button type="button" id="boton${producto.id}"> Agregar al carro </button> `); //Quiero que éste botón me agregue los productos
+     <button type="button" id="boton${producto.id}"> Agregar al carro </button> `); //Genera un botón por cada producto con su propio ID
     
     
      //BOTONES PARA AGREGAR AL CARRO POR CADA ITEM
@@ -40,8 +62,14 @@ const renderProductos =()=>{
         <p>${producto.caja}</p
         <p>$${producto.precio}</p></div> `)
 
+        listaCarrito.push(new Pasta (producto.tipo, producto.relleno, producto.caja, producto.precio));
         
-        // localStorage.setItem("Carrito",JSON.stringify(producto.tipo + " "+ producto.relleno+ " $" + producto.precio) )//¿Cómo hago para que me guarde los productos por separado en el storage?
+        console.log(listaCarrito);
+
+        // for() Capaz que con un for of puedo
+        localStorage.setItem("Carrito",JSON.stringify(listaCarrito))//¿Cómo hago para que me guarde los productos por separado en el storage?
+    
+        
     })
     
     }
@@ -53,31 +81,60 @@ const renderProductos =()=>{
 
 
 //BOTONES CARRITO
+//VER CARRITO CON JQUERY
+// let carroVisible = false;
+// let carrito= $("#carrito");
+
+// carrito.on("click", function(){
+    
+//     muestraOculto("carro",carroVisible);
+//     carroVisible = !carroVisible;
+
+//     muestraOculto= (nombre,visibilidad) =>{
+//         let elemento = nombre
+//         if (visibilidad== false){
+//         if(elemento.classList.contains("oculto")){
+//             elemento.classList.remove("oculto");    
+//         }
+//         elemento.className += "visible"//me agrega el visible a la clase y aparece
+//     }else {
+//         if(elemento.classList.contains("visible")){
+//             elemento.classList.remove("visible")
+//         }
+//         elemento.className+= "oculto"
+//         }
+//     }
+
+// }}}}
+
+
 
 
 //VER CARRITO
-let carrito= document.getElementById("carrito");
-let carroVisible = false;//estado inicial del carro
-carrito.onclick= () =>{
-    //muestra el div oculto que sería el carrito. 
-    muestraOculto("carro", carroVisible )
-    carroVisible = !carroVisible;//si era false, se pasa a true y viceversa
+ let carrito= document.getElementById("carrito");
+ let carroVisible = false;//estado inicial del carro
+ carrito.onclick= () =>{
+
+    //     //muestra el div oculto que sería el carrito. 
+
+     muestraOculto("carro", carroVisible )
+     carroVisible = !carroVisible;//si era false, se pasa a true y viceversa
     
 };
 
 function muestraOculto(nombre, visibilidad){
-    let elemento = document.getElementById(nombre)
-    if (visibilidad== false){
-        if(elemento.classList.contains("oculto")){
-            elemento.classList.remove("oculto");    
-        }
-        elemento.className += "visible"//me agrega el visible a la clase y aparece
-    }else {
-        if(elemento.classList.contains("visible")){
-            elemento.classList.remove("visible")
-        }
-        elemento.className+= "oculto"//me agrega el oculto a la clase y desaparece
-    }
+     let elemento = document.getElementById(nombre)
+     if (visibilidad== false){
+         if(elemento.classList.contains("oculto")){
+             elemento.classList.remove("oculto");    
+         }
+         elemento.className += "visible"//me agrega el visible a la clase y aparece
+     }else {
+         if(elemento.classList.contains("visible")){
+             elemento.classList.remove("visible")
+         }
+         elemento.className+= "oculto"//me agrega el oculto a la clase y desaparece
+     }
 }
 
 //PAGAR CON MERCADOPAGO
@@ -108,23 +165,16 @@ let limpiarCarro = document.getElementById("quitarItem")
         
         let carro= document.getElementById("itemCarro")
         carro.parentNode.removeChild(carro)
-        alert("Carro Limpio")
-
-        // localStorage.removeItem("carrito", JSON.stringify(productos[0])) Una vez que sepa cómo poner los items de a uno aprenderé por ende a sacar los items de a uno
+        
+        if(carro.parentNode.removeChild(carro)=== null){
+            alert("Carro Limpio")
+        } //Acá debería avisarme que el carro está vacío
+        
+        for( limpiarCarro of limpiar){
+        localStorage.removeItem("Carrito"); //Una vez que sepa cómo poner los items de a uno aprenderé por ende a sacar los items de a uno
         };
+    }
  
 
 
-
-
-  // productos.push(new Pastas ("Sorrentinos", "Jamón y Muzarella", 15, 400));
-// productos.push(new Pastas ("Sorrentinos", "Calabacín asado, Muzarella, y Nueces", 15, 450));
-// productos.push(new Pastas ("Sorrentinos", "Berenjenas ahumadas y Hongos", 15, 470));
-// productos.push(new Pastas ("Sorrentinos", "Salmón y coso", 15, 550))
-// productos.push(new Pastas ("Sorrentinos", "Carne y Ricota", 15, 390));
-
-// for (const pastas of productos){
-//    console.log(pastas.tipo +" "+ pastas.relleno +" "+ pastas.precio);
-   
-// };
 

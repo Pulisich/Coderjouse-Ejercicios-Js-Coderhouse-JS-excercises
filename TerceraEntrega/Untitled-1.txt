@@ -1,0 +1,34 @@
+//For OF vehiculos
+
+const mostrarVehiculos = () => {
+
+    for (vehiculo of vehiculos) { //Recorro todos los productos
+        $("#vehiculosCards").append(
+            `
+            <div class="card articles" style="width: 18rem;">
+                <img src="${vehiculo.imagen}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${vehiculo.nombre}</h5>
+                    <p class="card-text">${vehiculo.descripcion}</p>
+                    <p class="card-text"> Precio $ ${vehiculo.precio}</p>
+                    <p class="card-text"> Precio  U$ ${(vehiculo.precio/dolarVenta).toFixed(1)}</p>
+                    <button class='btn btn-primary' id='btn${vehiculo.id}'>Agregar</button>
+                </div>
+            </div>
+            `);
+
+        //Eventos
+        $(`#btn${vehiculo.id}`).on('click', function() {
+            //agregar el objeto al carrito 
+            console.log(this);
+            let card = $(this).parent().children();
+            console.log($(card[0]).text());
+            Swal.fire(
+                `Agregaste ${$(card[0]).text()}`
+            );
+        });
+
+
+    }
+
+}

@@ -5,3 +5,7 @@
 #cards{
     display: block;
 }
+
+#linkWA a{
+    text-decoration: none;
+}
