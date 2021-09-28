@@ -10,7 +10,18 @@ body{
     background-color: #f8dcd9;
 }
 
+::-webkit-scrollbar{
+    width: auto;
+    background: #f8dcd9;
+    border-radius: 50px;
 
+}
+
+::-webkit-scrollbar-thumb{
+    width: auto;
+    background: turquoise;
+    border-radius: 0px;
+}
 
 /*NAV*/
 
@@ -61,6 +72,8 @@ nav a{
 }
 /*CARDS*/
 
+
+
 #cards{
     display: block;
 }
@@ -72,6 +85,7 @@ nav a{
 .ulistaProd{
     background-color: #368f8b;
     text-align: center;
+    list-style: none;
 }
 .ulistaProd li{
     background-color: #368f8b;
@@ -98,15 +112,22 @@ nav a{
 }
 
 .ulistaProd button{
+    margin-top: 0.9%;
+
+    margin-bottom: 0.9%;
+
     background-color: #060505;
     color: #fbfbff;
     border-style: none;
+    border-radius: 25px;
     font-size: 25px;
     padding: 1%;
+
 }
 .imgProd{
     max-width: 100%;
     height: auto;
+    border-radius: 25px;
 }
 
 /*CARRITO*/
@@ -142,10 +163,12 @@ nav a{
 }
 
 
-.total{
+#totalCarro{
+    background-color: #060505;
+    color: #fbfbff;
     text-align: center;
-    font-size: 15px;
-    
+    font-size: 25px;
+    font-style: italic;
 }
 
 /*BOTONES CARRITO*/
